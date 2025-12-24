@@ -9,6 +9,14 @@
     "48": "icons/slitherator.png"
   },
 
+  "permissions": ["activeTab"],
+
+  "browser_action": {
+    "default_icon": "icons/slitherator.png",
+    "default_title": "Slitherator",
+    "default_popup": "popup/slitherator.html"
+  },
+
   "content_scripts": [
     {
       "matches": ["http://slither.com/io"],
