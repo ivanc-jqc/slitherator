@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
   mode: "development",
 
-  entry: "./slither.js",
+  entry: "./content/slither.js",
 
   output: {
     filename: "content.js",
