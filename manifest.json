@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
-  "name": "Slitherify",
+  "name": "Slitherator",
   "version": "1.0",
 
-  "description": "Adds a red border to all webpages matching mozilla.org.",
+  "description": "Useful Utilities for slither.io",
 
   "icons": {
-    "48": "icons/border-48.png"
+    "48": "icons/slitherator.png"
   },
 
   "content_scripts": [
