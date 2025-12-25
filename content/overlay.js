@@ -1,4 +1,4 @@
-export const addPlayer = (id, coords = {x:0, y:0}) => {
+export const addPlayer = (id, coords = { x: 0, y: 0 }) => {
     if (document.getElementById(id)) return;
 
 
@@ -19,7 +19,7 @@ export const addPlayer = (id, coords = {x:0, y:0}) => {
 }
 
 export const updateOverlay = (players, playerElementLookup) => {
-    
+
     Object.keys(playerElementLookup).forEach(id => {
         playerElementLookup[id].style.cssText = `
     position: absolute;
