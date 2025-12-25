@@ -6,13 +6,13 @@
   "description": "Useful Utilities for slither.io",
 
   "icons": {
-    "48": "icons/slitherator.png"
+    "48": "icons/slitherator-48.jpg"
   },
 
   "permissions": ["activeTab"],
 
   "browser_action": {
-    "default_icon": "icons/slitherator.png",
+    "default_icon": "icons/slitherator.jpg",
     "default_title": "Slitherator",
     "default_popup": "popup/slitherator.html"
   },
@@ -25,7 +25,14 @@
         ]
     }
   ],
-
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "@slitherator",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
   "web_accessible_resources": [
     "icons/player.png"
   ]
