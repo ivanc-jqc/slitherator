@@ -1,14 +1,13 @@
 import {
   updateOverlay,
-  addPlayer
+  addPlayer,
+  removePlayer
 } from "./overlay.js"
 
 const PLAYER_POS_OBJ_INDEX = 41;
-const MAP_OBJ_INDEX = 39;
 const playerPosition = document.getElementsByClassName("nsi")[PLAYER_POS_OBJ_INDEX];
-const mapObject = document.getElementsByClassName("nsi")[MAP_OBJ_INDEX];
 let players = {};
-
+let playerElementLookup = {};
 
 
 
@@ -24,16 +23,21 @@ socket.on("connect", () => {
 socket.on("existing players", (newPlayers) => {
   console.log("recieved")
   Object.keys(newPlayers).forEach(id => {
-    addPlayer(id, mapObject, newPlayers[id]);
-
+    playerElementLookup[id] = addPlayer(id, newPlayers[id]);
   }
   )
 
 }) 
 socket.on("new player", (id) => {
-  addPlayer(id, mapObject)
+  playerElementLookup[id] = addPlayer(id)
 })
 
+socket.on("player disconnect", (id) => {
+  removePlayer(playerElementLookup[id])
+  delete playerElementLookup[id]
+})
+
+//quick way of updating positions
 socket.on("position", (position) => {
   const {[socket.id]: _, ...temp } = position
   players = temp
@@ -41,12 +45,12 @@ socket.on("position", (position) => {
 
 
 setInterval(()=>{
-  console.log(playerPosition)
     socket.emit('position',  {
   x: playerPosition.x,
   y: playerPosition.y
 });
-  updateOverlay(players, mapObject);
+  updateOverlay(players, playerElementLookup);
+  console.log(playerElementLookup)
 }, 1000)
 
 

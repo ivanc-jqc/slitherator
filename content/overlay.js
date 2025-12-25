@@ -1,4 +1,4 @@
-export const addPlayer = (id, mapObject, coords = {x:0, y:0}) => {
+export const addPlayer = (id, coords = {x:0, y:0}) => {
     if (document.getElementById(id)) return;
 
 
@@ -14,19 +14,26 @@ export const addPlayer = (id, mapObject, coords = {x:0, y:0}) => {
     z-index: 13; 
     transform: translateZ(0px);
     `;
-    console.log(coords.x)
     document.body.append(newPlayer);
-
+    return newPlayer
 }
 
-export const updateOverlay = (players) => {
-    let x = 0;
-    let y = 0;
-    Object.keys(players).forEach(id => {
-
-        x = players[id].x;
-        y = players[id].y;
+export const updateOverlay = (players, playerElementLookup) => {
+    
+    Object.keys(playerElementLookup).forEach(id => {
+        playerElementLookup[id].style.cssText = `
+    position: absolute;
+    left: ${players[id].x}px; 
+    top: ${players[id].y}px; 
+    opacity: 1; 
+    z-index: 13; 
+    transform: translateZ(0px);
+    `;
 
 
     });
+}
+
+export const removePlayer = (element) => {
+    element.remove()
 }
