@@ -6,10 +6,11 @@ import {
 import { io } from "socket.io-client";
 const PLAYER_POS_OBJ_INDEX = 41;
 const playerPosition = document.getElementsByClassName("nsi")[PLAYER_POS_OBJ_INDEX];
+//ts so horrible!!!! change ts!!!!
 let players = {};
 let playerElementLookup = {};
 let intervalId = null;
-
+let socket = null
 
 
 browser.runtime.onMessage.addListener((msg, sender) => {
@@ -17,7 +18,11 @@ browser.runtime.onMessage.addListener((msg, sender) => {
 
   if (msg.type === "TUNNEL") {
     console.log("PING value:", msg.value);
-    const socket = io(msg.value, {
+    if (socket) {
+    socket.disconnect();
+    socket = null; 
+    }
+    socket = io(msg.value, {
         transports: ["websocket"]
     });
 socket.on("connect", () => {
