@@ -5,7 +5,7 @@ export const addPlayer = (id, coords = {x:0, y:0}) => {
     const newPlayer = document.createElement("img");
     newPlayer.id = id;
     newPlayer.className = "nsi";
-    newPlayer.src = "icons/player.png" 
+    newPlayer.src = browser.runtime.getURL("icons/player.png");
     newPlayer.style.cssText = `
     position: absolute;
     left: ${coords.x}px; 

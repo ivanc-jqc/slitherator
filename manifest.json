@@ -24,5 +24,11 @@
         "dist/content.js"
         ]
     }
+  ],
+
+  "web_accessible_resources": [
+    "icons/player.png"
   ]
+
+
 }

@@ -3,19 +3,23 @@ import {
   addPlayer,
   removePlayer
 } from "./overlay.js"
-
+import { io } from "socket.io-client";
 const PLAYER_POS_OBJ_INDEX = 41;
 const playerPosition = document.getElementsByClassName("nsi")[PLAYER_POS_OBJ_INDEX];
 let players = {};
 let playerElementLookup = {};
+let intervalId = null;
 
 
 
-import { io } from "socket.io-client";
-const socket = io("http://localhost:3000/", {
-  transports: ["websocket"]
-});
+browser.runtime.onMessage.addListener((msg, sender) => {
+  console.log("message received:", msg);
 
+  if (msg.type === "TUNNEL") {
+    console.log("PING value:", msg.value);
+    const socket = io(msg.value, {
+        transports: ["websocket"]
+    });
 socket.on("connect", () => {
   console.log("Socket connected:", socket.id);
 
@@ -42,16 +46,24 @@ socket.on("position", (position) => {
   const {[socket.id]: _, ...temp } = position
   players = temp
 });
-
-
-setInterval(()=>{
+  if (intervalId !== null) {
+    clearInterval(intervalId);
+  }
+  intervalId = setInterval(()=>{
     socket.emit('position',  {
   x: playerPosition.x,
   y: playerPosition.y
 });
-  updateOverlay(players, playerElementLookup);
+  console.log(players)
   console.log(playerElementLookup)
+  updateOverlay(players, playerElementLookup);
 }, 1000)
+
+  }
+});
+
+
+
 
 
 
