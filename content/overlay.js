@@ -1,3 +1,5 @@
+import browser from "webextension-polyfill";
+
 export const addPlayer = (id, coords = { x: 0, y: 0 }) => {
     if (document.getElementById(id)) return;
 

@@ -16,11 +16,11 @@
     "default_title": "Slitherator",
     "default_popup": "popup/slitherator.html"
   },
-
   "content_scripts": [
     {
       "matches": ["http://slither.com/io"],
       "js": [
+        "dist/browser-polyfill.js",
         "dist/content.js"
         ]
     }

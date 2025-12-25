@@ -4,6 +4,7 @@ import {
 	removePlayer
 } from "./overlay.js"
 import { io } from "socket.io-client";
+import browser from "webextension-polyfill";
 const PLAYER_POS_OBJ_INDEX = 41;
 const playerPosition = document.getElementsByClassName("nsi")[PLAYER_POS_OBJ_INDEX];
 //ts so horrible!!!! change ts!!!!
@@ -55,6 +56,7 @@ browser.runtime.onMessage.addListener((msg, sender) => {
 			clearInterval(intervalId);
 		}
 		intervalId = setInterval(() => {
+			console.log(playerPosition)
 			socket.emit('position', {
 				x: playerPosition.x,
 				y: playerPosition.y
